@@ -11,7 +11,13 @@ Contact info: artzimy@gmail.com
 
 # Overview
 ## Data organization
-;sald;alsd\lsa\d;'LDSA
+The dataset should include:
+<Images> folder with the training and validation images
+<Test> folder with the test images
+  
+  
+
+
 
 ## Included files
 Main: Execution file
