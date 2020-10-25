@@ -1,4 +1,4 @@
-# Clinical_CNN.Tabular-
+# Clinical_CNN.Tabular
 Fused architecture comprised of 2 neural networks, pre-trained ResNet-50 Convolutional Neural Network (CNN) and tabular based network for the classification brain pathology
 
 The proposed architecture built in fast.ai environment supports various CNN architectures (fast.ai version 1.0.61 built on top of PyTorch environment).
@@ -11,12 +11,14 @@ Contact info: artzimy@gmail.com
 
 # Overview
 ## Data organization
-The dataset should include:
-<Images> folder with the training and validation images
-<Test> folder with the test images
-  
-  
 
+The dataset should include:
+
+<Images> folder with the training and validation images and csv/xlsx file with data names and labels
+  
+<Test> folder with the test images and csv/xlsx file with data names and labels
+
+for the csv/xlsx files - see the demo examples files
 
 
 ## Included files
