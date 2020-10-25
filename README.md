@@ -22,6 +22,8 @@ TabConvData: Combined Item contains MRI image and patient metadata
 
 Inference: Predict on test set, print accuracy (majority vote iff majority_of_votes is True). Retrieve true and predicted labels for metrics calculation
 
+DEMOtrain_val_images_5fold: example to the CSV file
+
 ## Citation
 []
 
