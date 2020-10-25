@@ -9,7 +9,11 @@ The fused architecture is an integrated architecture which received tabular info
 
 Contact info: artzimy@gmail.com
 
-# Included files
+# Overview
+## Data organization
+;sald;alsd\lsa\d;'LDSA
+
+## Included files
 Main: Execution file
 
 Macros: Define macros according to names in excel for readability
@@ -18,8 +22,8 @@ TabConvData: Combined Item contains MRI image and patient metadata
 
 Inference: Predict on test set, print accuracy (majority vote iff majority_of_votes is True). Retrieve true and predicted labels for metrics calculation
 
-# Citation
+## Citation
 []
 
-# Author
+## Authors
 Moran Artzi, Erez Redmard, Oron Tzemach, Jonathan Zeltser
