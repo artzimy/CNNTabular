@@ -6,6 +6,7 @@ The proposed architecture built in fast.ai environment (fast.ai version 1.0.61 b
 ![CNN.Tabular architecture](https://github.com/artzimy/Clinical_CNN.Tabular-/blob/main/Clinical_CNN.Tabular.png) 
 
 The fused architecture received tabular information in the input layer along with images. The architecture is comprised of 2 neural networks: A 2D ResNet50 CNN [He et al. IEEE 2016] as the base model and the tabular network. The CNN is identical to ResNet50's architecture up until the linear layer, and the tabular network consists of batch-norm embedding layer followed by a 4 node linear layer. 
+
 Contact info: artzimy@gmail.com
 
 # Overview
