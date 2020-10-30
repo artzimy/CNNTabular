@@ -184,14 +184,12 @@ def set_df(df, valid_idx):
     return new_df
 
 
-# **Split data to train and validation sets - Optional**
+"""Split data to train and validation sets - Optional**
 # 
 # Helper functions alongisde loading the data, stratifying, splitting into test and validation and a sanity check
 # 
 # Training and validation are split by idx - these should be passed to .split_by_idx in the fastai ImageList constructor
-
-# In[ ]:
-
+"""
 
 def get_class_count(df) -> dict:
     grp = df.groupby([CLASS])[ID].nunique()

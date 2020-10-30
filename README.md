@@ -10,6 +10,9 @@ The fused architecture received tabular information in the input layer along wit
 Contact info: artzimy@gmail.com
 
 # Overview
+
+**IMPORTANT:** this code is built on fast.ai version 1.4. If you have version 2, please downgrade.
+
 ## Data organization
 
 The dataset should include:
@@ -22,15 +25,63 @@ The dataset should include:
 
 
 ## Included files
-Main: Execution file
+`Main`: Execution file
 
-Macros: Define macros according to names in excel for readability
+`Macros.py`: Define macros according to names in excel for readability
 
-TabConvData: Combined Item contains MRI image and patient metadata
+`TabConvData.py`: Combined Item contains MRI image and patient metadata
 
-Inference: Predict on test set, print accuracy (majority vote iff majority_of_votes is True). Retrieve true and predicted labels for metrics calculation
+`TabConvModel.py`: The combined model class and fusion methods.
+
+`Inference.py`: Predict on test set, print accuracy (majority vote iff majority_of_votes is True). Retrieve true and predicted labels for metrics calculation
 
 DEMOtrain_val_images_5fold: example to the CSV file
+
+## Data prerquistites
+Test / train data should be organized in a single folder for each set and separate csvs. 
+Column names should be:
+```
+ImageName | Group | Age | Sex | fold_1 | fold_2 | fold_3 | fold_4 | fold_5
+``` 
+Where `Group` refers to the data's labels, `fold_<i>` determines the training \ validation split for fold i (0 means training)
+
+These are changeable in `Macros.py` to suit your needs.
+
+## Model summary
+The model is a fusion of two `Learner` instances from fast.ai's API. Hence, in order to create a fused learner for training we initialize two learners for each of our submodels.
+This in turn requires initializing 3 `DataBunch` instances: image, tabular, and fused:
+```python
+img_data = (ImageList.from_df(df_data, path, suffix='.png')
+            .split_from_df(col=[valid_idx])
+            .label_from_df()
+            .transform(tfms, size=imsize, resize_method=ResizeMethod.SQUISH,padding_mode='zeros')
+            .databunch(device=torch.device('cuda:'+cuda_num), bs=bs))
+
+tab_data = (TabularList.from_df(df_data, cont_names=cont_names, procs=procs)
+            .split_from_df(col=[valid_idx])
+            .label_from_df(cols=CLASS)
+            .databunch(device=torch.device('cuda:'+cuda_num), bs=bs))
+
+data = (TabConvList.from_df(df_data, cont_names=cont_names, procs=procs,
+                           path=path, imgs=[ID],suffix='.png')
+        .split_from_df(col=[valid_idx])
+        .label_from_df(cols=CLASS, label_cls=CategoryList)
+        .transform(tfms, size=imsize, resize_method=ResizeMethod.SQUISH,padding_mode='zeros')
+        .databunch(device=torch.device('cuda:'+cuda_num), bs=bs, collate_fn=my_collate))
+
+```
+These are then used in the learner instantiation, also preformed 3 times:
+```python
+tab_learn = tabular_learner(tab_data, metrics=[accuracy,KappaScore(weights='quadratic')], layers=[tab_out_sz])
+
+img_learn = cnn_learner(img_data, models.resnet50, pretrained=True, metrics=[accuracy,KappaScore(weights='quadratic')])
+
+learn = fuse_models(data, tab_learn, img_learn, n_lin_tab=tab_out_sz, n_lin_conv=conv_out_sz, ps=ps, 
+                    wd=wd, metrics=[accuracy,KappaScore(weights='quadratic')], loss_func=loss_func)
+``` 
+
+From here on `learn` is trainable using `learn.fit`, `learn.fit_one_cycle`, and other fastai (verison 1)
+methods.
 
 ## Citation
 []

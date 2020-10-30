@@ -15,13 +15,7 @@ from Macros import *
 from TabConvData import *
 
 
-# **Interface**
-# 
-# Predict on test set, print accuracy (majority vote iff majority_of_votes is True).
-# 
-# Retrieve true and predicted labels for metrics calculation
 
-# In[ ]:
 
 
 def predict_test(path, csv_name, learner, majority_of_votes, show_preds=True):
