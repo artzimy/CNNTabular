@@ -84,7 +84,7 @@ From here on `learn` is trainable using `learn.fit`, `learn.fit_one_cycle`, and 
 methods.
 
 ## Citation
-[]
+M. Artzi et al., "Classification of Pediatric Posterior Fossa Tumors Using Convolutional Neural Network and Tabular Data," in IEEE Access, vol. 9, pp. 91966-91973, 2021, doi: 10.1109/ACCESS.2021.3085771.
 
 ## Authors
 Moran Artzi, Erez Redmard, Oron Tzemach, Jonathan Zeltser
